@@ -1,20 +1,19 @@
-import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function User() {
   const url = "http://localhost:4000";
   const [users, setUsers] = useState([]);
-
+  const getAllUser = () => {
+    axios
+      .get(url)
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.error(err));
+  }
+  
   useEffect(() => {
-    function getAllUsers() {
-      axios
-        .get(url)
-        .then((res) => setUsers(res.data))
-        .catch((err) => console.error(err));
-    }
-
-    getAllUsers();
+    getAllUser();
   }, []);
 
   return (
